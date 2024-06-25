@@ -37,11 +37,26 @@ main{
    padding-top: 20px;
 }
 .column > p{
-    text-align: center;
     background-color: blue;
-    margin-inline:20px;
-    padding: 5px;
+    margin-inline:10px;
+    border-radius: 10px;
+    padding: 10px;
+    padding-left: 20px;
     color: white;
+    display: flex;
+    justify-content: space-between;
+}
+.column > p:hover{
+    cursor: pointer;
+}
+.column > p > i{
+    padding-top: 5px;
+    padding-right: 5px;
+    display: none;
+}
+.column > p:hover > i{
+    display: block;
+    cursor: pointer;
 }
 .column > form{
     display: flex;
