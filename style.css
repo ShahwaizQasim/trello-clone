@@ -38,10 +38,10 @@ main{
 }
 .column > p{
     text-align: center;
-    background-color: blue;
+    background-color: #ccc;
     margin-inline:20px;
     padding: 5px;
-    color: white;
+    color: #000;
 }
 .column > form{
     display: flex;

@@ -14,24 +14,30 @@ const createElement = (inputValue) => {
     return paragraph_Element;
 }
 
+// let savedTasks = JSON.parse(localStorage.getItem("savedTasks"));
 
 const addTask = (event) => {
     
     event.preventDefault();
-    console.log(event);
+    // console.log(event);
     const currentForm = event.target;
 
     const inputValue = currentForm.elements[0].value;
-    console.log(`UserName: ${inputValue}`);
+//  console.log(`UserName: ${inputValue}`);
 
     const parentElement = currentForm.parentElement;
     
     const paragraph_Element = createElement(inputValue); 
-    console.log(paragraph_Element);
+    // console.log(paragraph_Element);
     parentElement.insertBefore(paragraph_Element, currentForm);
-    console.log(parentElement);
+    // console.log(parentElement);
     
-    currentForm.reset();
+    // savedTasks.push(inputValue);
+    // console.log(savedTasks);
+    // localStorage.setItem("savedTasks",JSON.stringify(savedTasks));
+    
+
+    currentForm.reset(); // clearing form
   
 }
 
