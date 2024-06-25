@@ -4,7 +4,7 @@ const columns = document.querySelectorAll(".column");
 /* create elements in javascript */
 const createElement = (inputValue) => {
     const paragraph_Element = document.createElement("p");
-    console.log(paragraph_Element);
+    // console.log(paragraph_Element);
     const paragraph_Text = document.createTextNode(inputValue);
     paragraph_Element.appendChild(paragraph_Text);
     paragraph_Element.setAttribute("draggable", "true")
@@ -18,9 +18,11 @@ const createElement = (inputValue) => {
     return paragraph_Element;
 }
 
+// let savedTasks = JSON.parse(localStorage.getItem("savedTasks"));
 
 const addTask = (event) => {
     event.preventDefault();
+
        console.log(event);
        const currentForm = event.target; // current form element
        const inputValue = currentForm.elements[0].value; // value written in form's input 
@@ -32,12 +34,19 @@ const addTask = (event) => {
       console.log("please input");
     } else{
         const paragraph_Element = createElement(inputValue); // paragraph create element function call
-        console.log(paragraph_Element);
+        // console.log(paragraph_Element);
  
         parentElement.insertBefore(paragraph_Element, currentForm);  // paragraph added in column
  
         currentForm.reset(); // clearing form
     }
+    
+    // savedTasks.push(inputValue);
+    // console.log(savedTasks);
+    // localStorage.setItem("savedTasks",JSON.stringify(savedTasks));
+    
+
+    currentForm.reset(); // clearing form
 }
 
 for (let i = 0; i < columns.length; i++) {
@@ -47,6 +56,6 @@ for (let i = 0; i < columns.length; i++) {
     form.addEventListener("submit", addTask);
 }
 
-const createTask = () => {
+// const createTask = () => {
 
-}
+// }

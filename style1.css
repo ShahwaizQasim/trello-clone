@@ -57,6 +57,11 @@ main{
 .column > p:hover > i{
     display: block;
     cursor: pointer;
+    text-align: center;
+    background-color: #ccc;
+    margin-inline:20px;
+    padding: 5px;
+    color: #000;
 }
 .column > form{
     display: flex;
