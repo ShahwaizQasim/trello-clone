@@ -12,7 +12,7 @@ const createElement = (inputValue) => {
     const trashIcon = document.createElement('i');
     trashIcon.classList.add('fa-solid');
     trashIcon.classList.add("fa-trash");
-    trashIcon.classList.add('trash');
+    // trashIcon.classList.add('trash');
     paragraph_Element.appendChild(trashIcon);
 
     return paragraph_Element;
