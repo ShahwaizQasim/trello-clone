@@ -18,14 +18,19 @@ const createElement = (inputValue) => {
     return paragraph_Element;
 }
 
-// let savedTasks = JSON.parse(localStorage.getItem("savedTasks"));
+// let savedTasks = JSON.parse(localStorage.getItem("savedTasks")); // fetching savedTasks object and converting
+// console.log(savedTasks);
+
+// if (!savedTasks) {
+//     savedTasks = {};
+// }
 
 const addTask = (event) => {
     event.preventDefault();
 
        console.log(event);
        const currentForm = event.target; // current form element
-       const inputValue = currentForm.elements[0].value; // value written in form's input 
+       let inputValue = currentForm.elements[0].value; // value written in form's input 
     //    console.log(`UserInput: ${inputValue}`);
        const parentElement = currentForm.parentElement; // parent of form i.e div.column
         // console.log("parent", parentElement);
@@ -36,14 +41,20 @@ const addTask = (event) => {
         const paragraph_Element = createElement(inputValue); // paragraph create element function call
         // console.log(paragraph_Element);
  
-        parentElement.insertBefore(paragraph_Element, currentForm);  // paragraph added in column
+        parentElement.insertBefore(paragraph_Element, currentForm);  // paragraph added in column before the form
  
         currentForm.reset(); // clearing form
     }
+
+    // const h3 = parentElement.children[0].innerText;
+    // console.log(h3);
+
+    // if (!Array.isArray(savedTasks[h3])) {
+    //     savedTasks[h3] = [];
+    // }
     
-    // savedTasks.push(inputValue);
-    // console.log(savedTasks);
-    // localStorage.setItem("savedTasks",JSON.stringify(savedTasks));
+    // savedTasks[h3].push(inputValue);
+    // localStorage.setItem("savedTasks", JSON.stringify(savedTasks));
     
 
     currentForm.reset(); // clearing form
