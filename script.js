@@ -73,9 +73,9 @@ for (let i = 0; i < columns.length; i++) {
 // }
 
 
-const userValue = prompt("Enter your five numbers");
-// console.log(!Number(userValue));
-// console.log(!Number(userValue));
-if (!Number(userValue)) {
-    alert("String Not Allow")
-}
+// const userValue = prompt("Enter your five numbers");
+// // console.log(!Number(userValue));
+// // console.log(!Number(userValue));
+// if (!Number(userValue)) {
+//     alert("String Not Allow")
+// }
