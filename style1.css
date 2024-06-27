@@ -73,17 +73,25 @@ body{
     color: white;
     font-weight: 300;
     padding-top: 3px;
+    cursor: pointer;
 }
 .nav2-left > p > i{
     color: white;
-    font-size: 0.8rem;
-    padding-top: 13px;
+    font-size: 0.9rem;
+    padding-top: 15px;
 }
 .nav2-left > h6{
     color: white;
     font-weight: 300;
     font-size: 0.9rem !important;
     padding-top: 4px;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+
+}
+.nav2-left > h6:hover{
+    background-color: #537FBB;
 }
 .nav2-table{
     height: 30px;
@@ -98,6 +106,9 @@ body{
     cursor: pointer;
     font-size: 1rem;
     margin-top: 6px;
+}
+.nav2-table:hover{
+    color: #fff !important;
 }
 /* navbar end  */
 /* ////////////////////////// */

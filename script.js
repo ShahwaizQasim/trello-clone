@@ -18,12 +18,12 @@ const createElement = (inputValue) => {
     return paragraph_Element;
 }
 
-// let savedTasks = JSON.parse(localStorage.getItem("savedTasks")); // fetching savedTasks object and converting
+let savedTasks = JSON.parse(localStorage.getItem("savedTasks")); // fetching savedTasks object and converting
 // console.log(savedTasks);
 
-// if (!savedTasks) {
-//     savedTasks = {};
-// }
+if (!savedTasks) {
+    savedTasks = [];
+}
 
 const addTask = (event) => {
     event.preventDefault();
@@ -52,9 +52,10 @@ const addTask = (event) => {
     // if (!Array.isArray(savedTasks[h3])) {
     //     savedTasks[h3] = [];
     // }
-    
     // savedTasks[h3].push(inputValue);
-    // localStorage.setItem("savedTasks", JSON.stringify(savedTasks));
+
+    savedTasks.push(inputValue);
+    localStorage.setItem("savedTasks", JSON.stringify(savedTasks));
     
 
     currentForm.reset(); // clearing form
@@ -70,3 +71,11 @@ for (let i = 0; i < columns.length; i++) {
 // const createTask = () => {
 
 // }
+
+
+const userValue = prompt("Enter your five numbers");
+// console.log(!Number(userValue));
+// console.log(!Number(userValue));
+if (!Number(userValue)) {
+    alert("String Not Allow")
+}
