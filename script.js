@@ -1,5 +1,7 @@
 const columns = document.querySelectorAll(".column");
 const input = document.querySelector("#add_task");
+const parent_main = document.querySelector("#main");
+const addCardBtn = document.querySelector("#addCard");
 
 
 /* create elements in javascript */
@@ -18,13 +20,12 @@ const createElementParagraph = (inputValue) => {
     return paragraph_Element;
 }
 
-let savedTasks = JSON.parse(localStorage.getItem("savedTasks")); // local storage me se fetch kar rahe hain savedTasks ko and object me convert kar rahe hain
+let UserSaveTasks = JSON.parse(localStorage.getItem("savedTasks")); // local storage me se data ko fetch kar rahe hain savedTasks ko object me convert kar rahe hain
 // console.log(savedTasks);
 
-if (!savedTasks) {
-    savedTasks = {};
+if (!UserSaveTasks) {
+    UserSaveTasks = {};
 }
- 
 
 // savedtask pehly se local storage me save hai just column me display karwaya hai 
 // for (let i = 0; i < savedTasks.length; i++) {
@@ -52,19 +53,17 @@ const addTask = (event) => {
         parentElement.insertBefore(paragraph_Element, currentForm);  // paragraph added in column before the form
 
         currentForm.reset(); // clearing form
-
-        // savedTasks.push(inputValue); //  local storage me user ki value store krwaya hai
-        localStorage.setItem("savedTasks", JSON.stringify(savedTasks)); //
-
+        
         const h3Value = parentElement.children[0].innerText;
         console.log(h3Value);
+        
+        if (!Array.isArray(UserSaveTasks[h3Value])) {
+            UserSaveTasks[h3Value] = []; // agar array nahi hai tw empty array set krwa do because undefined me .push nho ho sakta error ayega 
+        }
+        
+        UserSaveTasks[h3Value].push(inputValue);
+        localStorage.setItem("savedTasks", JSON.stringify(UserSaveTasks)); // local storage me data ko save kar rhe hain 
     }
-
-
-    // if (!Array.isArray(savedTasks[h3])) {
-    //     savedTasks[h3] = [];
-    // }
-    // savedTasks[h3].push(inputValue);
 
 }
 
@@ -73,14 +72,44 @@ for (let i = 0; i < columns.length; i++) {
     form.addEventListener("submit", addTask);
 }
 
-// const createTask = () => {
+const createCard = (cardsTitle) => {
 
-// }
+    // <div class="column">
+    //     <h5>Work Todo</h5>
+    //      <p>task 1</p>
+    //         <p>task 2 <i class="fa-solid fa-trash"></i></p>
+    //         <p>task 3</p> 
+    //     <form>
+    //       <input type="text" placeholder="add task" id="add_task" />
+    //     </form>
+    //   </div>
 
+    const myDiv = document.createElement("div")
+    myDiv.setAttribute("class", "column");
+    // console.log(myDiv);
 
-// const userValue = prompt("Enter your five numbers");
-// // console.log(!Number(userValue));
-// // console.log(!Number(userValue));
-// if (!Number(userValue)) {
-//     alert("String Not Allow")
-// }
+    const h5 = document.createElement("h5");
+    const h5Text = document.createTextNode(cardsTitle);
+
+    const myForm = document.createElement("form");
+
+    const myInput = document.createElement("input");
+    myInput.setAttribute("type","text");
+    myInput.setAttribute("placeholder","add task");
+    myInput.setAttribute("id","add_task");
+    
+    h5.appendChild(h5Text);
+    myDiv.appendChild(h5);
+    myForm.appendChild(myInput);
+    myDiv.appendChild(myForm);
+
+    return myDiv;
+    
+}
+createCard();
+
+addCardBtn.addEventListener("click", () => {
+    const cardTitle = prompt("Enter card name"); 
+    const yourDiv = createCard(cardTitle);
+    parent_main.appendChild(yourDiv);
+})

@@ -17,9 +17,11 @@ body{
 
 /* navbar */
  .navbar{
-    min-height: auto; 
+    min-height: 70px; 
     background-color: #08479E !important;
     padding-bottom: 10px;
+    display: flex;
+    align-items: center;
  }
  .nav-link{
     font-size: 0.9rem !important;
@@ -51,6 +53,9 @@ body{
     border-radius: 4px;
     color: white;
 } 
+.form-control{
+    height: 40px !important;
+}
 
 /* nav2 */
 .nav2{
@@ -128,25 +133,27 @@ main{
 }
 .column{
     height: auto;
-    min-width: 250px; 
+    min-width: 300px; 
     border-radius: 15px;
     background-color: #F1F2F4;
     display: flex;
     flex-direction: column;
-    gap: 10px;
     padding-bottom: 20px;
+    box-shadow: 2px 2px 10px #666;
 }
 .column > h5{
    text-align: center;
    padding-top: 10px;
+   margin-bottom: 20px;
 
 }
 .column > p{
-    background-color: blue;
-    margin-inline:10px;
+    background-color: #FFFFFF;
+    box-shadow: 2px 2px 5px #666;
+    margin-inline:15px;
     border-radius: 10px;
     padding: 8px 8px 8px 8px;
-    color: white;
+    color: #000;
     display: flex;
     justify-content: space-between;
 }
@@ -163,8 +170,6 @@ main{
     cursor: pointer;
     text-align: center;
     /* background-color: #ccc; */
-    margin-inline:20px;
-    padding: 5px;
     color: #000;
 }
 .column > form{
@@ -175,7 +180,26 @@ main{
     width: 90%;
     padding: 5px;
     outline: none;
+    margin-top: 15px;
 }
 .column > form > input::placeholder{
     font-size: 14px;
+}
+#addCard{
+    height: 35px;
+    width: 100px;
+    /* margin: 10px; */
+    margin: 15px 0px 0px 15px !important;
+    background-color: transparent;
+    color: black;
+    outline: none;
+    transition: 0.3s;
+}
+#addCard:hover{
+    background-color: #0055CC;
+    color: white;
+    border: 1px solid #0055CC;
+}
+#addCard:active{
+    border: 2px solid #fff;
 }
