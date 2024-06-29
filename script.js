@@ -20,13 +20,6 @@ const createElementParagraph = (inputValue) => {
     return paragraph_Element;
 }
 
-let UserSaveTasks = JSON.parse(localStorage.getItem("savedTasks")); // local storage me se data ko fetch kar rahe hain savedTasks ko object me convert kar rahe hain
-// console.log(savedTasks);
-
-if (!UserSaveTasks) {
-    UserSaveTasks = {};
-}
-
 // savedtask pehly se local storage me save hai just column me display karwaya hai 
 // for (let i = 0; i < savedTasks.length; i++) {
 //     const p = createElement(savedTasks[i]);
@@ -109,10 +102,24 @@ const createCard = (cardsTitle) => {
     return myDiv;
     
 }
-// createCard();
+// createCard(); 
+
+let UserSaveTasks = JSON.parse(localStorage.getItem("savedTasks")); // local storage me se data ko fetch kar rahe hain savedTasks ko object me convert kar rahe hain
+// console.log(savedTasks);
+
+if (!UserSaveTasks) {
+    UserSaveTasks = {};
+}
+
+for (const mainTask in UserSaveTasks) {
+    amDiv = createCard(mainTask);
+    main.insertBefore(amDiv, addCardBtn);
+}
+
 
 addCardBtn.addEventListener("click", () => {
     const cardTitle = prompt("Enter card name"); 
     const yourDiv = createCard(cardTitle);
-    parent_main.appendChild(yourDiv)
-}) 
+    
+    main.insertBefore(yourDiv, addCardBtn)
+})

@@ -190,16 +190,16 @@ main{
     width: 100px;
     /* margin: 10px; */
     margin: 15px 0px 0px 15px !important;
-    background-color: transparent;
+    background-color: #fff;
     color: black;
     outline: none;
     transition: 0.3s;
 }
-#addCard:hover{
+/* #addCard:hover{
     background-color: #0055CC;
     color: white;
     border: 1px solid #0055CC;
-}
+} */
 #addCard:active{
-    border: 2px solid #fff;
+    border: 2px solid  #0055CC;
 }
