@@ -1,4 +1,4 @@
-const columns = document.querySelectorAll(".column");
+// const columns = document.querySelector(".column");
 const input = document.querySelector("#add_task");
 const parent_main = document.querySelector("#main");
 const addCardBtn = document.querySelector("#addCard");
@@ -42,14 +42,16 @@ const addTask = (event) => {
        console.log(event);
        const currentForm = event.target; // current form element
        let inputValue = currentForm.elements[0].value; // value written in form's input 
+       console.log(inputValue);
        const parentElement = currentForm.parentElement; // parent of form i.e div.column
 
     if (!inputValue) {
         input.style.border = '2px solid red'; // agr user input empty enter kary tw input ka border red ho jaega 
         console.log("please input");
     }else{
-        input.style.border = ''; // agr user input empty enter kary tw input ka border red ho jaega 
+        // input.style.border = ''; // agr user input empty enter kary tw input ka border red ho jaega 
         const paragraph_Element = createElementParagraph(inputValue); // paragraph create element function call
+
         parentElement.insertBefore(paragraph_Element, currentForm);  // paragraph added in column before the form
 
         currentForm.reset(); // clearing form
@@ -64,13 +66,12 @@ const addTask = (event) => {
         UserSaveTasks[h3Value].push(inputValue);
         localStorage.setItem("savedTasks", JSON.stringify(UserSaveTasks)); // local storage me data ko save kar rhe hain 
     }
-
 }
 
-for (let i = 0; i < columns.length; i++) {
-    const form = columns[i].lastElementChild; // selecting every column's form because form is last element
-    form.addEventListener("submit", addTask);
-}
+// for (let i = 0; i < columns.length; i++) {
+//     const form = columns[i].lastElementChild; // selecting every column's form because form is last element
+//     form.addEventListener("submit", addTask);
+// }
 
 const createCard = (cardsTitle) => {
 
@@ -103,13 +104,15 @@ const createCard = (cardsTitle) => {
     myForm.appendChild(myInput);
     myDiv.appendChild(myForm);
 
+    myForm.addEventListener("submit", addTask)
+
     return myDiv;
     
 }
-createCard();
+// createCard();
 
 addCardBtn.addEventListener("click", () => {
     const cardTitle = prompt("Enter card name"); 
     const yourDiv = createCard(cardTitle);
-    parent_main.appendChild(yourDiv);
-})
+    parent_main.appendChild(yourDiv)
+}) 
