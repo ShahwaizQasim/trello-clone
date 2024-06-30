@@ -23,6 +23,15 @@ body{
     display: flex;
     align-items: center;
  }
+ .navbar-brand > img{
+    height: 40px;
+    padding-bottom: 2px;
+    color: white;
+    border-color: white;
+ }
+ .navbar-brand > span{
+    margin-left: 10px;
+ }
  .nav-link{
     font-size: 0.9rem !important;
     transition: 0.6s;
@@ -56,6 +65,7 @@ body{
 .form-control{
     height: 40px !important;
 }
+/* navbar end  */
 
 /* nav2 */
 .nav2{
@@ -120,7 +130,7 @@ body{
 .nav2-table:hover{
     color: #fff !important;
 }
-/* navbar end  */
+/* nav2 end  */
 /* ////////////////////////// */
 /* sections start  */
 main{
@@ -176,18 +186,28 @@ main{
     display: flex;
     justify-content: center;
 }
-.column > form > input{
+.column > form > .addTask{
     width: 90%;
     padding: 5px;
     outline: none;
     margin-top: 15px;
 }
-.column > form > input::placeholder{
+.column > form > .addTask::placeholder{
+    font-size: 14px;
+}
+.column > form > .addTask1{
+    border: 2px solid red !important;
+    width: 90%;
+    padding: 5px;
+    outline: none;
+    margin-top: 15px;
+}
+.column > form > .addTask1::placeholder{
     font-size: 14px;
 }
 #addCard{
     height: 35px;
-    width: 100px;
+    min-width: 100px;
     /* margin: 10px; */
     margin: 15px 0px 0px 15px !important;
     background-color: #fff;
@@ -203,3 +223,24 @@ main{
 #addCard:active{
     border: 2px solid  #0055CC;
 }
+/* sections end  */
+/* //////////////////////////////////  */
+
+/* footer start  */
+
+footer{
+    min-height: 80px;
+    width: 100vw;
+    background-color: #125EA6;
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+footer > h5 > a{
+    text-decoration: none;
+    color: white;
+    font-weight: normal;
+}
+

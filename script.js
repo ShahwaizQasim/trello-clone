@@ -1,5 +1,4 @@
 // const columns = document.querySelector(".column");
-const input = document.querySelector("#add_task");
 const parent_main = document.querySelector("#main");
 const addCardBtn = document.querySelector("#addCard");
 
@@ -32,31 +31,29 @@ const createElementParagraph = (inputValue) => {
 const addTask = (event) => {
     event.preventDefault();
 
-       console.log(event);
+    //    console.log(event);
        const currentForm = event.target; // current form element
+       const myInput = currentForm.elements[0]; // input written
        let inputValue = currentForm.elements[0].value; // value written in form's input 
-       console.log(inputValue);
        const parentElement = currentForm.parentElement; // parent of form i.e div.column
 
     if (!inputValue) {
-        input.style.border = '2px solid red'; // agr user input empty enter kary tw input ka border red ho jaega 
-        console.log("please input");
+        myInput.className = "addTask1"; // agr user input empty enter kary tw input ka border red ho jaega
     }else{
-        // input.style.border = ''; // agr user input empty enter kary tw input ka border red ho jaega 
+        myInput.className = "addTask"; // agr user input empty enter kary tw input ka border red ho jaega 
         const paragraph_Element = createElementParagraph(inputValue); // paragraph create element function call
 
         parentElement.insertBefore(paragraph_Element, currentForm);  // paragraph added in column before the form
 
         currentForm.reset(); // clearing form
         
-        const h3Value = parentElement.children[0].innerText;
-        console.log(h3Value);
+        const h5Value = parentElement.children[0].innerText; // card ky title ka text is variable me store kiya hai 
         
-        if (!Array.isArray(UserSaveTasks[h3Value])) {
-            UserSaveTasks[h3Value] = []; // agar array nahi hai tw empty array set krwa do because undefined me .push nho ho sakta error ayega 
+        if (!Array.isArray(UserSaveTasks[h5Value])) {
+            UserSaveTasks[h5Value] = []; // agar array nahi hai tw empty array set krwa do because undefined me .push nho ho sakta error ayega 
         }
         
-        UserSaveTasks[h3Value].push(inputValue);
+        UserSaveTasks[h5Value].push(inputValue);
         localStorage.setItem("savedTasks", JSON.stringify(UserSaveTasks)); // local storage me data ko save kar rhe hain 
     }
 }
@@ -74,7 +71,7 @@ const createCard = (cardsTitle) => {
     //         <p>task 2 <i class="fa-solid fa-trash"></i></p>
     //         <p>task 3</p> 
     //     <form>
-    //       <input type="text" placeholder="add task" id="add_task" />
+    //       <input type="text" placeholder="add task" class="add_task" />
     //     </form>
     //   </div>
 
@@ -90,7 +87,7 @@ const createCard = (cardsTitle) => {
     const myInput = document.createElement("input");
     myInput.setAttribute("type","text");
     myInput.setAttribute("placeholder","add task");
-    myInput.setAttribute("id","add_task");
+    myInput.setAttribute("class","addTask");
     
     h5.appendChild(h5Text);
     myDiv.appendChild(h5);
@@ -104,22 +101,45 @@ const createCard = (cardsTitle) => {
 }
 // createCard(); 
 
+
 let UserSaveTasks = JSON.parse(localStorage.getItem("savedTasks")); // local storage me se data ko fetch kar rahe hain savedTasks ko object me convert kar rahe hain
 // console.log(savedTasks);
 
-if (!UserSaveTasks) {
-    UserSaveTasks = {};
+if (!UserSaveTasks) {  
+    UserSaveTasks = {}; // agr local storage me kuch bi store na ho tw empty object ko set kar do 
 }
 
-for (const mainTask in UserSaveTasks) {
-    amDiv = createCard(mainTask);
-    main.insertBefore(amDiv, addCardBtn);
+/* page referesh karny par value apni jaga par rahengi */
+for (const myKey in UserSaveTasks) { // local storage se data ko display krwany ky liye forin loop ka use kiya
+
+    const card_div = createCard(myKey); // jo div create ki thi usko ak variable me store krwaya hai
+    const arrayOfTask = UserSaveTasks[myKey]; // local storage me se object ki value ko variable me store kawaya hai 
+
+    for (let i = 0; i < arrayOfTask.length; i++) {
+       const p = createElementParagraph(arrayOfTask[i]); // jo paragraph create kiya tha uss paragraph ke ander object ki values ko rakh dia
+       card_div.insertBefore(p, card_div.lastElementChild) // uss paragraph ko from se pehla print karwaya hai
+    }
+
+    main.insertBefore(card_div, addCardBtn); // card ko button se pehle print krwa dia 
 }
 
-
-addCardBtn.addEventListener("click", () => {
-    const cardTitle = prompt("Enter card name"); 
-    const yourDiv = createCard(cardTitle);
+addCardBtn.addEventListener("click", () => {  // jb card par click ho  
+    const cardTitle = prompt("Enter Your Card Name"); // user card title input karega
+    const yourDiv = createCard(cardTitle); // jo div create ki thi usky ander user jo title input karega wo div ka title hoga
     
-    main.insertBefore(yourDiv, addCardBtn)
+    main.insertBefore(yourDiv, addCardBtn)  // card ko button se pehle print krwa dia 
 })
+
+
+// const createInput = () => {
+//     // console.log(event);
+//     const form = document.createElement("form");
+//     const input2 = document.createElement("input");
+//     input2.setAttribute("type", "text");
+//     input2.setAttribute("placeholder","Enter Your Card Name");
+//     input2.setAttribute("class", "addTask");
+//     form.appendChild(input2);
+
+//     return form;
+// }
+// console.log(createInput());
