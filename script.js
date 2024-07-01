@@ -2,7 +2,6 @@
 const parent_main = document.querySelector("#main");
 const addCardBtn = document.querySelector("#addCard");
 
-
 /* create elements in javascript */
 const createElementParagraph = (inputValue) => {
     const paragraph_Element = document.createElement("p");
@@ -13,7 +12,7 @@ const createElementParagraph = (inputValue) => {
     const trashIcon = document.createElement('i');
     trashIcon.classList.add('fa-solid');
     trashIcon.classList.add("fa-trash");
-    // trashIcon.classList.add('trash');
+    trashIcon.classList.add('remove_Element');
     paragraph_Element.appendChild(trashIcon);
 
     return paragraph_Element;
@@ -54,7 +53,7 @@ const addTask = (event) => {
         }
         
         UserSaveTasks[h5Value].push(inputValue);
-        localStorage.setItem("savedTasks", JSON.stringify(UserSaveTasks)); // local storage me data ko save kar rhe hain 
+        localStorage.setItem("savedTasks", JSON.stringify(UserSaveTasks)); // local storage me data ko save kara hai
     }
 }
 
@@ -66,7 +65,7 @@ const addTask = (event) => {
 const createCard = (cardsTitle) => {
 
     // <div class="column">
-    //     <h5>Work Todo</h5>
+    //     <h5>Work Todo <i class="fa-solid fa-xmark"></i></h5>
     //      <p>task 1</p>
     //         <p>task 2 <i class="fa-solid fa-trash"></i></p>
     //         <p>task 3</p> 
@@ -79,8 +78,15 @@ const createCard = (cardsTitle) => {
     myDiv.setAttribute("class", "column");
     // console.log(myDiv);
 
-    const h5 = document.createElement("h5");
-    const h5Text = document.createTextNode(cardsTitle);
+    const h6 = document.createElement("h6");
+    const h6Text = document.createTextNode(cardsTitle);
+
+    const XMarkIcon = document.createElement("i");
+    XMarkIcon.classList.add("fa-solid");
+    XMarkIcon.classList.add("fa-xmark");
+    XMarkIcon.classList.add("removeCard")
+
+    console.log(XMarkIcon);
 
     const myForm = document.createElement("form");
 
@@ -89,8 +95,11 @@ const createCard = (cardsTitle) => {
     myInput.setAttribute("placeholder","add task");
     myInput.setAttribute("class","addTask");
     
-    h5.appendChild(h5Text);
-    myDiv.appendChild(h5);
+    // myDiv.innerHTML = ``
+
+    h6.appendChild(h6Text);
+    h6.appendChild(XMarkIcon);
+    myDiv.appendChild(h6);
     myForm.appendChild(myInput);
     myDiv.appendChild(myForm);
 
@@ -129,6 +138,30 @@ addCardBtn.addEventListener("click", () => {  // jb card par click ho
     
     main.insertBefore(yourDiv, addCardBtn)  // card ko button se pehle print krwa dia 
 })
+
+
+// Remove Column for user Xmark Button use  
+const RemoveCard = document.querySelectorAll(".removeCard");
+RemoveCard.forEach((cardRemove) => {
+    cardRemove.addEventListener("click", (event) => {
+          event.target.parentElement.parentElement.remove();
+    })
+})
+
+// remove paragraph Element for user delete button use  
+const removeTask = document.querySelectorAll(".remove_Element");
+
+removeTask.forEach((i) => {
+    i.addEventListener("click", (event) => {
+       event.target.parentElement.remove();
+    })
+ })
+
+ const editTask = document.querySelector("edit_task");
+
+
+
+
 
 
 // const createInput = () => {

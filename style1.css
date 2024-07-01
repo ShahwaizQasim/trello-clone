@@ -77,7 +77,7 @@ body{
 }
 .nav2-left{
     height: 40px;
-    min-width: 450px;
+    /* min-width: 450px; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -150,19 +150,36 @@ main{
     flex-direction: column;
     padding-bottom: 20px;
     box-shadow: 2px 2px 10px #666;
+    position: relative;
 }
-.column > h5{
-   text-align: center;
-   padding-top: 10px;
+.column > h6{
+   padding-top: 12px;
    margin-bottom: 20px;
+   margin-inline: 25px;
+   font-size: 1.2rem;
 
 }
+.column > h6 > i{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    height: 30px;
+    width: 30px;
+    background-color: transparent;
+    padding: 5px 5px 5px 8px;
+    border-radius: 5px;
+}
+.column > h6 > i:hover{
+    background-color: #ccc;
+    cursor: pointer;
+}
 .column > p{
+    min-height: 48px;
     background-color: #FFFFFF;
     box-shadow: 2px 2px 5px #666;
     margin-inline:15px;
     border-radius: 10px;
-    padding: 8px 8px 8px 8px;
+    padding: 10px 8px 8px 8px;
     color: #000;
     display: flex;
     justify-content: space-between;
@@ -171,9 +188,16 @@ main{
     cursor: pointer;
 }
 .column > p > i{
-    padding-top: 5px;
-    padding-right: 5px;
     display: none;
+    transition: 0.4s;
+    height: 30px;
+    width: 35px;
+    padding: 6px;
+    background-color: transparent;
+    border-radius: 5px;
+}
+.column > p > i:hover{
+    background-color: #ccc;
 }
 .column > p:hover > i{
     display: block;
@@ -229,7 +253,7 @@ main{
 /* footer start  */
 
 footer{
-    min-height: 80px;
+    min-height: 65px;
     width: 100vw;
     background-color: #125EA6;
     position: fixed;
@@ -242,5 +266,28 @@ footer > h5 > a{
     text-decoration: none;
     color: white;
     font-weight: normal;
+    font-size: 1.2rem;
 }
 
+
+@media screen and (max-width: 500px) {
+    footer > h5 > a {
+        font-size: 1rem;
+    }
+}
+@media screen and (max-width: 420px) {
+    footer > h5 > a {
+        font-size: 1rem;
+    }
+    .nav2-table{
+        height: 25px;
+        width: 60px;
+        font-size: 0.2rem;
+    }
+    .nav2-left > h6{
+        font-size: 0.8rem !important;
+    }
+    .nav2-left > h5{
+        font-size: 1rem !important;
+    }
+}
