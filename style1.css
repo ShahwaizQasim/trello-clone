@@ -77,7 +77,6 @@ body{
 }
 .nav2-left{
     height: 40px;
-    /* min-width: 450px; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -289,5 +288,18 @@ footer > h5 > a{
     }
     .nav2-left > h5{
         font-size: 1rem !important;
+    }
+    footer > h5 > a {
+        font-size: 0.8rem;
+    }
+}
+@media screen and (max-width: 320px) {
+    .nav2-left > h6{
+        font-size: 0.7rem !important;
+    }
+    .nav2-table{
+        height: 25px;
+        width: 30px;
+        font-size: 2px !important;
     }
 }

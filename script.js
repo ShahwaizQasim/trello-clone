@@ -145,6 +145,7 @@ const RemoveCard = document.querySelectorAll(".removeCard");
 RemoveCard.forEach((cardRemove) => {
     cardRemove.addEventListener("click", (event) => {
           event.target.parentElement.parentElement.remove();
+        //   localStorage.removeItem();
     })
 })
 
