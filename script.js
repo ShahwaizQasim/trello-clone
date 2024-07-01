@@ -145,6 +145,11 @@ const RemoveCard = document.querySelectorAll(".removeCard");
 RemoveCard.forEach((cardRemove) => {
     cardRemove.addEventListener("click", (event) => {
           event.target.parentElement.parentElement.remove();
+        //   let storedObjects = JSON.parse(localStorage.getItem("savedTasks"));
+        //   let changeObject = storedObjects.cardRemove.removeItem();
+        //   let updatedObject = JSON.stringify(changeObject);
+        //   localStorage.setItem("savedTasks", updatedObject);
+
         //   localStorage.removeItem();
     })
 })
