@@ -86,8 +86,6 @@ const createCard = (cardsTitle) => {
     XMarkIcon.classList.add("fa-xmark");
     XMarkIcon.classList.add("removeCard")
 
-    console.log(XMarkIcon);
-
     const myForm = document.createElement("form");
 
     const myInput = document.createElement("input");
@@ -140,30 +138,34 @@ addCardBtn.addEventListener("click", () => {  // jb card par click ho
 })
 
 
-// Remove Column for user Xmark Button use  
+/* Remove Column for user Xmark Button use */
 const RemoveCard = document.querySelectorAll(".removeCard");
 RemoveCard.forEach((cardRemove) => {
     cardRemove.addEventListener("click", (event) => {
           event.target.parentElement.parentElement.remove();
-        //   let storedObjects = JSON.parse(localStorage.getItem("savedTasks"));
-        //   let changeObject = storedObjects.cardRemove.removeItem();
-        //   let updatedObject = JSON.stringify(changeObject);
-        //   localStorage.setItem("savedTasks", updatedObject);
-
-        //   localStorage.removeItem();
+        // let storedObjects = JSON.parse(localStorage.getItem("savedTasks"));
+        // delete storedObjects.cardRemove;
+        // let updateObject = localStorage.setItem("savedTasks", JSON.stringify(storedObjects))
     })
 })
 
-// remove paragraph Element for user delete button use  
-const removeTask = document.querySelectorAll(".remove_Element");
 
+/* remove paragraph Element for user delete button use */
+const removeTask = document.querySelectorAll(".remove_Element");
 removeTask.forEach((i) => {
     i.addEventListener("click", (event) => {
        event.target.parentElement.remove();
+        // let storedObjects = JSON.parse(localStorage.getItem("savedTasks"));
+        // console.log(storedObjects);
+        // delete storedObjects.i;
+        // let updateObject = localStorage.setItem("savedTasks", JSON.stringify(storedObjects))
+        // console.log(updateObject);
     })
  })
 
- const editTask = document.querySelector("edit_task");
+ 
+
+//  const editTask = document.querySelector("edit_task");
 
 
 
