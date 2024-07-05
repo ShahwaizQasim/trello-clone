@@ -2,21 +2,7 @@
 const parent_main = document.querySelector("#main");
 const addCardBtn = document.querySelector("#addCard");
 
-/* create elements in javascript */
-const createElementParagraph = (inputValue) => {
-    const paragraph_Element = document.createElement("p");
-    const paragraph_Text = document.createTextNode(inputValue);
-    paragraph_Element.appendChild(paragraph_Text);
-    paragraph_Element.setAttribute("draggable", "true")
-
-    const trashIcon = document.createElement('i');
-    trashIcon.classList.add('fa-solid');
-    trashIcon.classList.add("fa-trash");
-    trashIcon.classList.add('remove_Element');
-    paragraph_Element.appendChild(trashIcon);
-
-    return paragraph_Element;
-}
+let theElementRaised = null;
 
 // savedtask pehly se local storage me save hai just column me display karwaya hai 
 // for (let i = 0; i < savedTasks.length; i++) {
@@ -101,12 +87,61 @@ const createCard = (cardsTitle) => {
     myForm.appendChild(myInput);
     myDiv.appendChild(myForm);
 
-    myForm.addEventListener("submit", addTask)
+    myForm.addEventListener("submit", addTask);
+
+    myDiv.addEventListener("dragleave", (event) => event.preventDefault());
+
+    myDiv.addEventListener("dragover", (event) => event.preventDefault());
+
+    myDiv.addEventListener("drop", (event) => {
+        let DropTicket = event.target; // jis element par drop kiya ja raha ho
+
+        const condition1 = DropTicket.className.includes("column");
+        const condition2 = DropTicket.children[0];
+
+        if (condition1) {
+            console.log('column', DropTicket);
+            DropTicket.insertBefore(theElementRaised, myForm);
+        }
+        if (condition2) {
+            console.log('condition2', condition2)
+            DropTicket.insertBefore(theElementRaised, myForm);
+        }
+    })
+
+    // myDiv.addEventListener("drop", (event) => {
+    //     console.log(event);
+    // })
 
     return myDiv;
     
 }
 // createCard(); 
+
+
+/* create elements in javascript */
+const createElementParagraph = (inputValue) => {
+    const paragraph_Element = document.createElement("p");
+    const paragraph_Text = document.createTextNode(inputValue);
+    paragraph_Element.appendChild(paragraph_Text);
+    paragraph_Element.setAttribute("draggable", "true")
+
+    const trashIcon = document.createElement('i');
+    trashIcon.classList.add('fa-solid');
+    trashIcon.classList.add("fa-trash");
+    trashIcon.classList.add('remove_Element');
+    paragraph_Element.appendChild(trashIcon);
+
+    paragraph_Element.addEventListener("mousedown", (event) => {
+        theElementRaised = event.target; // wo element jo utha hoa hai
+        console.log('theElementRaised', theElementRaised)
+        console.log('1');
+        // console.log(event);
+    })
+
+    return paragraph_Element;
+}
+
 
 
 let UserSaveTasks = JSON.parse(localStorage.getItem("savedTasks")); // local storage me se data ko fetch kar rahe hain savedTasks ko object me convert kar rahe hain
@@ -132,10 +167,13 @@ for (const myKey in UserSaveTasks) { // local storage se data ko display krwany 
 
 addCardBtn.addEventListener("click", () => {  // jb card par click ho  
     const cardTitle = prompt("Enter Your Card Name"); // user card title input karega
+    if (!cardTitle) return; // agr prompt user empty enter kary tw card nhi hoga
     const yourDiv = createCard(cardTitle); // jo div create ki thi usky ander user jo title input karega wo div ka title hoga
     
     main.insertBefore(yourDiv, addCardBtn)  // card ko button se pehle print krwa dia 
 })
+
+/* data structure of local storage */
 
 
 /* Remove Column for user Xmark Button use */
