@@ -65,6 +65,7 @@ const createCard = (cardsTitle) => {
     // console.log(myDiv);
 
     const h6 = document.createElement("h6");
+    h6.setAttribute("class","columnTitle");
     const h6Text = document.createTextNode(cardsTitle);
 
     const XMarkIcon = document.createElement("i");
@@ -94,24 +95,26 @@ const createCard = (cardsTitle) => {
     myDiv.addEventListener("dragover", (event) => event.preventDefault());
 
     myDiv.addEventListener("drop", (event) => {
-        let DropTicket = event.target; // jis element par drop kiya ja raha ho
+        let DropTicketInColumn = event.target; // jis element par drop kiya ja raha ho
 
-        const condition1 = DropTicket.className.includes("column");
-        const condition2 = DropTicket.children[0];
+        const condition1 = DropTicketInColumn.className.includes("column");
+        const condition2 = DropTicketInColumn.children[0].className.includes("columnTitle");
+        const condition3 = DropTicketInColumn.className.includes("taskTicket");
+        console.log('condition3', condition3);
 
         if (condition1) {
-            console.log('column', DropTicket);
-            DropTicket.insertBefore(theElementRaised, myForm);
+            DropTicketInColumn.insertBefore(theElementRaised, myForm);
+            console.log('column', DropTicketInColumn);
         }
         if (condition2) {
+            DropTicketInColumn.insertBefore(theElementRaised, myForm);
             console.log('condition2', condition2)
-            DropTicket.insertBefore(theElementRaised, myForm);
+        }
+        if (condition3) {
+            DropTicketInColumn.parentElement.insertBefore(theElementRaised, myForm);
+            console.log('condition3', condition3)
         }
     })
-
-    // myDiv.addEventListener("drop", (event) => {
-    //     console.log(event);
-    // })
 
     return myDiv;
     
@@ -122,6 +125,7 @@ const createCard = (cardsTitle) => {
 /* create elements in javascript */
 const createElementParagraph = (inputValue) => {
     const paragraph_Element = document.createElement("p");
+    paragraph_Element.setAttribute("class", "taskTicket")
     const paragraph_Text = document.createTextNode(inputValue);
     paragraph_Element.appendChild(paragraph_Text);
     paragraph_Element.setAttribute("draggable", "true")

@@ -141,7 +141,7 @@ main{
     margin-top: 20px;
 }
 .column{
-    height: auto;
+    min-height: 150px;
     min-width: 300px; 
     border-radius: 15px;
     background-color: #F1F2F4;
