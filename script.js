@@ -80,7 +80,7 @@ const createCard = (cardsTitle) => {
     myInput.setAttribute("placeholder","add task");
     myInput.setAttribute("class","addTask");
     
-    // myDiv.innerHTML = ``
+    const myPara = document.createElement("p");
 
     h6.appendChild(h6Text);
     h6.appendChild(XMarkIcon);
@@ -98,9 +98,9 @@ const createCard = (cardsTitle) => {
         let DropTicketInColumn = event.target; // jis element par drop kiya ja raha ho
 
         const condition1 = DropTicketInColumn.className.includes("column");
-        const condition2 = DropTicketInColumn.children[0].className.includes("columnTitle");
+        const condition2 = DropTicketInColumn.className.includes("columnTitle");
         const condition3 = DropTicketInColumn.className.includes("taskTicket");
-        console.log('condition3', condition3);
+        const condition4 = DropTicketInColumn.className.includes("addTask");
 
         if (condition1) {
             DropTicketInColumn.insertBefore(theElementRaised, myForm);
@@ -108,11 +108,13 @@ const createCard = (cardsTitle) => {
         }
         if (condition2) {
             DropTicketInColumn.insertBefore(theElementRaised, myForm);
-            console.log('condition2', condition2)
         }
         if (condition3) {
             DropTicketInColumn.parentElement.insertBefore(theElementRaised, myForm);
-            console.log('condition3', condition3)
+        }
+        if (condition4) {
+            DropTicketInColumn.parentElement.parentElement.insertBefore(theElementRaised, DropTicketInColumn.lastElementChild);
+            console.log('condition4', condition4);
         }
     })
 
@@ -138,8 +140,7 @@ const createElementParagraph = (inputValue) => {
 
     paragraph_Element.addEventListener("mousedown", (event) => {
         theElementRaised = event.target; // wo element jo utha hoa hai
-        console.log('theElementRaised', theElementRaised)
-        console.log('1');
+        console.log('theElementRaised', theElementRaised);
         // console.log(event);
     })
 

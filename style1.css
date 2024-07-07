@@ -208,6 +208,7 @@ main{
 .column > form{
     display: flex;
     justify-content: center;
+    margin-bottom: 20px;
 }
 .column > form > .addTask{
     width: 90%;
@@ -217,6 +218,9 @@ main{
 }
 .column > form > .addTask::placeholder{
     font-size: 14px;
+}
+.column > form > .addTask:focus{
+    border: 2px solid blue;
 }
 .column > form > .addTask1{
     border: 2px solid red !important;
@@ -238,13 +242,14 @@ main{
     outline: none;
     transition: 0.3s;
 }
-/* #addCard:hover{
+#addCard:hover{
     background-color: #0055CC;
     color: white;
     border: 1px solid #0055CC;
-} */
+}
 #addCard:active{
-    border: 2px solid  #0055CC;
+    border: 2px solid  #fff;
+    /* transform: scale(0.9); */
 }
 /* sections end  */
 /* //////////////////////////////////  */
