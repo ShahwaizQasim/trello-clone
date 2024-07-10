@@ -6,7 +6,7 @@ if (!UserSaveTasks) {
     UserSaveTasks = {}; // agr local storage me kuch bi store na ho tw empty object ko set kar do 
 }
 
-let theElementRaised;
+let theElementRaised = null;
 
 const addTask = (event) => {
     event.preventDefault();
@@ -41,23 +41,25 @@ const addTask = (event) => {
 
 const handleDragOver = (event) => {
     event.preventDefault();
-        console.log('DragOver', event);
-    if (event.target.className.includes("column")) {
-        event.target.classList.add("column_dropAble")
+        console.log('DragOver', event.target);
+    if (event.target.className === "column") {
+        event.target.classList.add("column_dropAble");
     }
 };
 
 
 const HandleDragLeave = (event) => {
     event.preventDefault();
+    // console.log('dragLeave', event.target);
     if (event.target.className.includes("column")) {
-        event.target.classList.remove("column_dropAble")
+        event.target.classList.remove("column_dropAble");
     }
 };
 
 
 const HandleDrop = (event) => {
     let DropTicketInColumn = event.target; // jis element par drop kiya ja raha ho
+    let form = DropTicketInColumn.lastElementChild;
 
         const condition1 = DropTicketInColumn.className.includes("column");
         const condition2 = DropTicketInColumn.className.includes("columnTitle");
@@ -67,8 +69,10 @@ const HandleDrop = (event) => {
         // jis task ko hum drap & drop krwa rahe hain jis column me drop krwaenga wo local storage me bi ussi column me save ho rahe hain 
         function localStorageSave(){
             const movedFrom = theElementRaised.parentElement.firstChild.innerText;
+
+            // after shifting the ticket we will update local-storage as well 
             const movedTo = theElementRaised.parentElement.firstChild.innerText;
-            console.log(`MovedFrom ${movedFrom} to MovedTo ${movedTo}`);
+            // console.log(`MovedFrom ${movedFrom} to MovedTo ${movedTo}`);
             
             UserSaveTasks[movedFrom] = UserSaveTasks[movedFrom].filter(
                 (task) => task !== theElementRaised.innerText
@@ -76,25 +80,26 @@ const HandleDrop = (event) => {
             !Array.isArray(UserSaveTasks[movedTo]) ? (UserSaveTasks[movedTo] === theElementRaised.innerText) : UserSaveTasks[movedTo].push(theElementRaised.innerText);
             
             localStorage.setItem("savedTasks", JSON.stringify(UserSaveTasks));
+
         }
 
         if (condition1) {
-            DropTicketInColumn.insertBefore(theElementRaised, myForm);
+            DropTicketInColumn.insertBefore(theElementRaised, form);
             localStorageSave(); // function call
         }
 
         if (condition2) {
-            DropTicketInColumn.insertBefore(theElementRaised, myForm);
+            DropTicketInColumn.insertBefore(theElementRaised, form);
             localStorageSave(); // function call
         }
 
         if (condition3) {
-            DropTicketInColumn.parentElement.insertBefore(theElementRaised, myForm);
+            DropTicketInColumn.parentElement.insertBefore(theElementRaised, form);
             localStorageSave(); // function call
         }
 
         if (condition4) {
-            DropTicketInColumn.parentElement.parentElement.insertBefore(theElementRaised, DropTicketInColumn.lastElementChild);
+            DropTicketInColumn.parentElement.parentElement.insertBefore(theElementRaised, form);
             localStorageSave(); // function call
         }
 };
@@ -129,8 +134,6 @@ export const createCard = (cardsTitle) => {
     myInput.setAttribute("type","text");
     myInput.setAttribute("placeholder","add task");
     myInput.setAttribute("class","addTask");
-    
-    const myPara = document.createElement("p");
 
     h6.appendChild(h6Text);
     h6.appendChild(XMarkIcon);
@@ -143,7 +146,6 @@ export const createCard = (cardsTitle) => {
     myDiv.addEventListener("drop", HandleDrop)
 
     myForm.addEventListener("submit", addTask);
-
 
     return myDiv;
     
