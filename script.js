@@ -68,62 +68,43 @@ addCard.addEventListener("submit", (event) => {  // jb card par click ho
 
 
 /* Remove Column for user Xmark Button use */
-const RemoveCard = document.querySelectorAll(".removeCard");
-RemoveCard.forEach((cardRemove) => {
-    cardRemove.addEventListener("click", (event) => {
-          event.target.parentElement.parentElement.remove();
-        // let storedObjects = JSON.parse(localStorage.getItem("savedTasks"));
-        // delete storedObjects.cardRemove;
-        // let updateObject = localStorage.setItem("savedTasks", JSON.stringify(storedObjects))
-    })
+
+main.addEventListener("click", (event) => {
+
+    if (event.target.classList.contains("removeCard")) { // jab tak removeCard ki class nahi milegi jb tak if condition nahi chalegi
+        const cardElement = event.target.parentElement.parentElement;
+        const cardTitle = cardElement.querySelector(".columnTitle").innerText;
+        cardElement.remove();
+
+        // Card Remove From Local Storage
+        delete UserSaveTasks[cardTitle]; 
+        localStorage.setItem("savedTasks", JSON.stringify(UserSaveTasks));
+    }
+
+    if (event.target.classList.contains("remove_Element")) {
+        const taskElement = event.target.parentElement;
+        const taskText = taskElement.innerText;
+        const taskColumnElement = taskElement.parentElement;
+        const taskColumnTitle = taskColumnElement.querySelector(".columnTitle").innerText;
+
+        // Remove From DOM 
+        taskElement.remove();
+        
+        console.log(UserSaveTasks[taskColumnTitle]); // aese hum object ki values ko catch kar sakte hain
+        
+        // Remove Task From Local Storage 
+        UserSaveTasks[taskColumnTitle] = UserSaveTasks[taskColumnTitle].filter((task) => task !== taskText);
+        localStorage.setItem("savedTasks", JSON.stringify(UserSaveTasks));
+
+    }
 })
 
 
 /* remove paragraph Element for user delete button use */
 
-let removeTask = document.querySelectorAll(".remove_Element");
-removeTask.forEach((i) => {
-    // console.log('i', i);
-    i.addEventListener("click", (event) => {
-
-       let storedObjects = JSON.parse(localStorage.getItem("savedTasks"));
-
-       let objPropertyText = event.target.parentElement.innerText;
-       let currentTask =  event.target.parentElement.remove();
-
-       delete storedObjects[objPropertyText].currentTask;
-
-       localStorage.setItem("savedTasks", JSON.stringify(storedObjects));
-
-    //    let currentCard = event.target.parentElement.parentElement;
-    //    const index = UserSaveTasks[objPropertyText];
-    //    console.log(index);
-
-
-    //    let currentCardTitle = event.target.parentElement.parentElement.children[0].innerText;
-
-    })
- })
 
 
  
 
 //  const editTask = document.querySelector("edit_task");
 
-
-
-
-
-
-// const createInput = () => {
-//     // console.log(event);
-//     const form = document.createElement("form");
-//     const input2 = document.createElement("input");
-//     input2.setAttribute("type", "text");
-//     input2.setAttribute("placeholder","Enter Your Card Name");
-//     input2.setAttribute("class", "addTask");
-//     form.appendChild(input2);
-
-//     return form;
-// }
-// console.log(createInput());
