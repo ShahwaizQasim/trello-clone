@@ -5,8 +5,9 @@ import { createCard, createElementParagraph } from "./functions.js";
 const main = document.querySelector("#main");
 const addCard = document.querySelector(".myInput");
 
+
 let UserSaveTasks = JSON.parse(localStorage.getItem("savedTasks")); // local storage me se data ko fetch kar rahe hain savedTasks ko object me convert kar rahe hain
-// console.log(savedTasks);
+// console.log(UserSaveTasks);
 
 if (!UserSaveTasks) {  
     UserSaveTasks = {}; // agr local storage me kuch bi store na ho tw empty object ko set kar do 
@@ -27,19 +28,6 @@ if (!UserSaveTasks) {
 //     const form = columns[i].lastElementChild; // selecting every column's form because form is last element
 //     form.addEventListener("submit", addTask);
 // }
-// const createInput = () => {
-
-//    const myForm = document.createElement("form");
-
-//    const myInput = document.createElement("input");
-//    myInput.setAttribute("type","text");
-//    myInput.setAttribute("placeholder","Enter Your Title");
-//    myInput.setAttribute("class","addTask");
-
-//    return myForm;
-
-// }
-// createInput();
 
 
 
@@ -65,7 +53,6 @@ addCard.addEventListener("submit", (event) => {  // jb card par click ho
 
     if (!User_cardTitle) return ; // agr prompt user empty enter kary tw card nhi hoga
     const yourDiv = createCard(User_cardTitle); // jo div create ki thi usky ander user jo title input karega wo div ka title hoga
-
     UserSaveTasks[User_cardTitle] = [];
     localStorage.setItem("savedTasks", JSON.stringify(UserSaveTasks));
     
@@ -93,17 +80,31 @@ RemoveCard.forEach((cardRemove) => {
 
 
 /* remove paragraph Element for user delete button use */
-const removeTask = document.querySelectorAll(".remove_Element");
+
+let removeTask = document.querySelectorAll(".remove_Element");
 removeTask.forEach((i) => {
+    // console.log('i', i);
     i.addEventListener("click", (event) => {
-       event.target.parentElement.remove();
-        // let storedObjects = JSON.parse(localStorage.getItem("savedTasks"));
-        // console.log(storedObjects);
-        // delete storedObjects.i;
-        // let updateObject = localStorage.setItem("savedTasks", JSON.stringify(storedObjects))
-        // console.log(updateObject);
+
+       let storedObjects = JSON.parse(localStorage.getItem("savedTasks"));
+
+       let objPropertyText = event.target.parentElement.innerText;
+       let currentTask =  event.target.parentElement.remove();
+
+       delete storedObjects[objPropertyText].currentTask;
+
+       localStorage.setItem("savedTasks", JSON.stringify(storedObjects));
+
+    //    let currentCard = event.target.parentElement.parentElement;
+    //    const index = UserSaveTasks[objPropertyText];
+    //    console.log(index);
+
+
+    //    let currentCardTitle = event.target.parentElement.parentElement.children[0].innerText;
+
     })
  })
+
 
  
 

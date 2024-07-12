@@ -24,8 +24,6 @@ const addTask = (event) => {
         const paragraph_Element = createElementParagraph(inputValue); // paragraph create element function call
 
         parentElement.insertBefore(paragraph_Element, currentForm);  // paragraph added in column before the form
-
-        currentForm.reset(); // clearing form
         
         const h5Value = parentElement.children[0].innerText; // card ky title ka text is variable me store kiya hai 
         
@@ -35,6 +33,8 @@ const addTask = (event) => {
         
         UserSaveTasks[h5Value].push(inputValue);
         localStorage.setItem("savedTasks", JSON.stringify(UserSaveTasks)); // local storage me data ko save kara hai
+        
+        currentForm.reset(); // clearing form
     }
 }
 
