@@ -183,7 +183,6 @@ main{
     padding: 10px 8px 8px 8px;
     color: #000;
     display: flex;
-    justify-content: space-between;
 }
 .column > p:hover{
     cursor: pointer;
@@ -191,6 +190,9 @@ main{
 .column > p > i{
     display: none;
     transition: 0.4s;
+    position: relative;
+    left: 150px;
+    top: 0px;
     height: 30px;
     width: 35px;
     padding: 6px;

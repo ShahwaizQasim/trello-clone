@@ -86,16 +86,25 @@ main.addEventListener("click", (event) => {
         const taskText = taskElement.innerText;
         const taskColumnElement = taskElement.parentElement;
         const taskColumnTitle = taskColumnElement.querySelector(".columnTitle").innerText;
+        console.log(taskColumnTitle);
 
         // Remove From DOM 
         taskElement.remove();
         
-        console.log(UserSaveTasks[taskColumnTitle]); // aese hum object ki values ko catch kar sakte hain
+        // console.log(UserSaveTasks[taskColumnTitle]); // aese hum object ki values ko catch kar sakte hain
         
         // Remove Task From Local Storage 
         UserSaveTasks[taskColumnTitle] = UserSaveTasks[taskColumnTitle].filter((task) => task !== taskText);
         localStorage.setItem("savedTasks", JSON.stringify(UserSaveTasks));
 
+    }
+
+    if (event.target.classList.contains("Edit_Element")) {
+        const taskElement = event.target.parentElement;
+        const taskText = taskElement.innerText;
+        console.log(taskText);
+        const taskColumn = taskElement.parentElement;
+        console.log(taskColumn);
     }
 })
 

@@ -41,7 +41,7 @@ const addTask = (event) => {
 
 const handleDragOver = (event) => {
     event.preventDefault();
-        console.log('DragOver', event.target);
+        // console.log('DragOver', event.target);
     if (event.target.className === "column") {
         event.target.classList.add("column_dropAble");
     }
@@ -160,11 +160,38 @@ export const createElementParagraph = (inputValue) => {
     paragraph_Element.appendChild(paragraph_Text);
     paragraph_Element.setAttribute("draggable", "true")
 
+ // <i class="fa-solid fa-pen Edit_Element"></i>
+    const editIcon = document.createElement("i")
+    editIcon.classList.add("fa-solid");
+    editIcon.classList.add("fa-pen");
+    editIcon.classList.add("Edit_Element");
+
+    paragraph_Element.appendChild(editIcon);
+
+ // <i class="fa-solid fa-pen remove_Element"></i>
     const trashIcon = document.createElement('i');
     trashIcon.classList.add('fa-solid');
     trashIcon.classList.add("fa-trash");
     trashIcon.classList.add('remove_Element');
+
     paragraph_Element.appendChild(trashIcon);
+   
+
+    // trashIcon.addEventListener("click", (event) => {
+    //     const taskElement =  event.target.parentElement;
+    //     const taskText = event.target.parentElement.innerText;
+    //     const columnTitle = taskElement.parentElement.querySelector("h6").innerText;
+
+    //     // Remove from DOM 
+    //     taskElement.remove();
+
+    //     // Remove From Local Storage 
+    //     UserSaveTasks[columnTitle] = UserSaveTasks[columnTitle].filter((task) => task !== taskText)
+
+    //     // Update Local Storage  
+    //     localStorage.setItem("savedTasks", JSON.stringify(UserSaveTasks));
+
+    // })
 
     paragraph_Element.addEventListener("mousedown", (event) => {
         theElementRaised = event.target; // wo element jo utha hoa hai
