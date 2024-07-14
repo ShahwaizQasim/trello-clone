@@ -66,41 +66,42 @@ const HandleDrop = (event) => {
         const condition3 = DropTicketInColumn.className.includes("taskTicket");
         const condition4 = DropTicketInColumn.className.includes("addTask");
 
-        // jis task ko hum drap & drop krwa rahe hain jis column me drop krwaenga wo local storage me bi ussi column me save ho rahe hain 
-        function localStorageSave(){
-            const movedFrom = theElementRaised.parentElement.firstChild.innerText;
-
-            // after shifting the ticket we will update local-storage as well 
-            const movedTo = theElementRaised.parentElement.firstChild.innerText;
-            // console.log(`MovedFrom ${movedFrom} to MovedTo ${movedTo}`);
-            
-            UserSaveTasks[movedFrom] = UserSaveTasks[movedFrom].filter(
-                (task) => task !== theElementRaised.innerText
-              );
-            !Array.isArray(UserSaveTasks[movedTo]) ? (UserSaveTasks[movedTo] === theElementRaised.innerText) : UserSaveTasks[movedTo].push(theElementRaised.innerText);
-            
-            localStorage.setItem("savedTasks", JSON.stringify(UserSaveTasks));
-
-        }
-
         if (condition1) {
+
+            // todo clean up left below 
+            const movedFrom = theElementRaised.parentElement.firstChild.innerText;   
+
             DropTicketInColumn.insertBefore(theElementRaised, form);
-            localStorageSave(); // function call
+
+            event.target.classList.remove("column_dropAble");
+
+            // localStorageSave(); // function call
+
+
+      // jis task ko hum drap & drop krwa rahe hain jis column me drop krwaenga wo local storage me bi ussi column me save ho rahe hain 
+
+                // after shifting the ticket we will update local-storage as well 
+                const movedTo = theElementRaised.parentElement.firstChild.innerText;
+                // console.log(`MovedFrom ${movedFrom} to MovedTo ${movedTo}`);
+                
+                UserSaveTasks[movedFrom] = UserSaveTasks[movedFrom].filter(
+                    (task) => task !== theElementRaised.innerText
+                  );
+                !Array.isArray(UserSaveTasks[movedTo]) ? (UserSaveTasks[movedTo] === theElementRaised.innerText) : UserSaveTasks[movedTo].push(theElementRaised.innerText);
+                
+                localStorage.setItem("savedTasks", JSON.stringify(UserSaveTasks));
         }
 
         if (condition2) {
             DropTicketInColumn.insertBefore(theElementRaised, form);
-            localStorageSave(); // function call
         }
 
         if (condition3) {
             DropTicketInColumn.parentElement.insertBefore(theElementRaised, form);
-            localStorageSave(); // function call
         }
 
         if (condition4) {
             DropTicketInColumn.parentElement.parentElement.insertBefore(theElementRaised, form);
-            localStorageSave(); // function call
         }
 };
 export const createCard = (cardsTitle) => {
@@ -160,14 +161,6 @@ export const createElementParagraph = (inputValue) => {
     paragraph_Element.appendChild(paragraph_Text);
     paragraph_Element.setAttribute("draggable", "true")
 
- // <i class="fa-solid fa-pen Edit_Element"></i>
-    const editIcon = document.createElement("i")
-    editIcon.classList.add("fa-solid");
-    editIcon.classList.add("fa-pen");
-    editIcon.classList.add("Edit_Element");
-
-    paragraph_Element.appendChild(editIcon);
-
  // <i class="fa-solid fa-pen remove_Element"></i>
     const trashIcon = document.createElement('i');
     trashIcon.classList.add('fa-solid');
@@ -195,6 +188,9 @@ export const createElementParagraph = (inputValue) => {
 
     paragraph_Element.addEventListener("mousedown", (event) => {
         theElementRaised = event.target; // wo element jo utha hoa hai
+        // if (event.target.className = "column") {
+        //    event.target.classList.remove("column_dropAble");    
+        // }
     })
 
     return paragraph_Element;

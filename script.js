@@ -98,14 +98,6 @@ main.addEventListener("click", (event) => {
         localStorage.setItem("savedTasks", JSON.stringify(UserSaveTasks));
 
     }
-
-    if (event.target.classList.contains("Edit_Element")) {
-        const taskElement = event.target.parentElement;
-        const taskText = taskElement.innerText;
-        console.log(taskText);
-        const taskColumn = taskElement.parentElement;
-        console.log(taskColumn);
-    }
 })
 
 
